@@ -83,7 +83,7 @@ public class BD {
             servicioActualizacion.query(sentencia);
             System.out.println("Modificación nodo 'libro' completada.");
         } catch (Exception e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }
 
@@ -109,7 +109,7 @@ public class BD {
                 i++;
             }
         } catch (Exception e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }
 
@@ -122,7 +122,7 @@ public class BD {
             coleccion.removeResource(coleccion.getResource("libros.xml"));
             System.out.println("Borrado fichero 'libros.txt' completado.");
         } catch (Exception e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }
 
@@ -135,7 +135,7 @@ public class BD {
             coleccion.close();
             System.out.println("Conexión con la DB cerrada.");
         } catch (Exception e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }
 }
