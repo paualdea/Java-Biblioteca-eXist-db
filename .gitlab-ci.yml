@@ -14,14 +14,13 @@ stages:
 job_compilacion:
   stage: build
   script:
-    - |
-      mvn clean package -DskipTests
-      # 1. Buscamos la clase principal
-      MAIN_CLASS=$(grep -rl "public static void main" src/main/java | head -n 1 | sed 's|.*src/main/java/||' | sed 's/\.java//' | tr '/' '.')
-      echo "Clase principal detectada: $MAIN_CLASS"
-      echo "Main-Class: $MAIN_CLASS" > manifest.txt
-      jar ufm target/*.jar manifest.txt
-      mv target/*.jar $PACKAGE_NAME
+    - mvn clean package -DskipTests
+    # Maven genera dos JARs. Buscamos el que tiene las dependencias (el Fat JAR)
+    - FAT_JAR=$(ls target/*-jar-with-dependencies.jar)
+    - echo "Fat JAR detectado: $FAT_JAR"
+    # Lo movemos al nombre estándar que espera tu pipeline
+    - mv "$FAT_JAR" "$PACKAGE_NAME"
+    - echo "Archivo $PACKAGE_NAME listo para distribución."
   artifacts:
     paths:
       - $PACKAGE_NAME
