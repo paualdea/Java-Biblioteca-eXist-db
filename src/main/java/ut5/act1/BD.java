@@ -107,4 +107,28 @@ public class BD {
             e.getMessage();
         }
     }
+
+    /**
+     * Función que elimina 'libros.txt' de la colección Biblioteca.
+     */
+    public void borrarLibros() {
+        try {
+            // Borramos el recurso 'libros.xml' de la colección (Biblioteca).
+            coleccion.removeResource(coleccion.getResource("libros.xml"));
+        } catch (Exception e) {
+            e.getMessage();
+        }
+    }
+
+    /**
+     * Función para cerrar la conexión con la base de datos XML
+     */
+    public void cerrarConexion() {
+        try {
+            // Cerramos la conexión de la coleccion de la DB.
+            coleccion.close();
+        } catch (Exception e) {
+            e.getMessage();
+        }
+    }
 }

@@ -30,5 +30,11 @@ public class Main {
 
         // Consultamos todos los títulos de los libros de 'libros.xml'
         bd.consultarTitulosLibros();
+
+        // Borramos 'libros.xml'
+        bd.borrarLibros();
+
+        // Cerramos la conexión con la DB
+        bd.cerrarConexion();
     }
 }
