@@ -28,7 +28,7 @@ El programa sigue el siguiente flujo de trabajo:
 ## Instrucciones de Uso
 
 Para ejecutar este programa, es necesario tener instalado y en ejecución el servidor de **eXist-db**. 
-Se puede utilizar el fichero `.jar` o el código fuente disponibles en las [_releases_]() del proyecto.
+Se puede utilizar el fichero `.jar` o el código fuente disponibles en las [_releases_](https://git.paualdea.com/paualdea/Java-Biblioteca-eXist-db/-/releases) del proyecto.
 
 ---
 Este proyecto sirve como evidencia del aprendizaje sobre la gestión de información jerárquica y semiestructurada, esencial para el desarrollo de sistemas en la asignatura de **Acceso a Datos**.
