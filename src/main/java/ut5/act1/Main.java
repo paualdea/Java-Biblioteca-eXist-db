@@ -21,5 +21,14 @@ public class Main {
 
         // Creamos libros.xml con el contenido de 'estructuraXML'
         bd.insertarLibros(estructuraXML);
+
+        // Definimos la sentencia XQuery para actualizar libros.xml
+        String sentencia = "update insert <editorial>Ediciones DAM</editorial> into /biblioteca/libro[titulo='Acceso a Datos']";
+
+        // Actualizamos el contenido de libro.xml
+        bd.modificarLibro(sentencia);
+
+        // Consultamos todos los títulos de los libros de 'libros.xml'
+        bd.consultarTitulosLibros();
     }
 }

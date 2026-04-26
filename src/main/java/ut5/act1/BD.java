@@ -3,8 +3,11 @@ package ut5.act1;
 import org.xmldb.api.DatabaseManager;
 import org.xmldb.api.base.Collection;
 import org.xmldb.api.base.Database;
+import org.xmldb.api.base.ResourceIterator;
+import org.xmldb.api.base.ResourceSet;
 import org.xmldb.api.modules.CollectionManagementService;
 import org.xmldb.api.modules.XMLResource;
+import org.xmldb.api.modules.XQueryService;
 
 public class BD {
     private Collection coleccion;
@@ -58,6 +61,50 @@ public class BD {
             coleccion.storeResource(recurso);
         } catch (Exception e) {
             System.err.println(e.getMessage());
+        }
+    }
+
+    /**
+     * Función para modificar el contenido de un nodo 'libro' de 'libros.xml'.
+
+     * @param sentencia
+     * Recibe cómo parámetro la sentencia XQuery para modificar el nodo 'libro'.
+     */
+    public void modificarLibro (String sentencia) {
+        try {
+            // Creamos un servicio de tipo XQuery para ejecutar la sentencia sobre el servidor.
+            XQueryService servicioActualizacion = (XQueryService) coleccion.getService("XQueryService", "1.0");
+
+            // Ejecutamos la sentencia que recibimos cómo parámetro.
+            servicioActualizacion.query(sentencia);
+        } catch (Exception e) {
+            e.getMessage();
+        }
+    }
+
+    /**
+     * Función que muestra todos los titulos de los nodos 'libro' de 'libros.xml'.
+     */
+    public void consultarTitulosLibros() {
+        try {
+            // Creamos un servicio de tipo XQuery para ejecutar la sentencia sobre el servidor.
+            XQueryService servicioConsulta = (XQueryService) coleccion.getService("XQueryService", "1.0");
+
+            // Creamos una consulta XQuery para consultar todos los títulos de los nodos 'titulo' dentro de los nodos 'libro'.
+            String consulta = "for $libro in /biblioteca/libro return $libro/titulo/text()";
+            // Ejecutamos la consulta y la almacenamos, luego creamos un iterador para recorrer todos los recursos.
+            ResourceSet resultados = servicioConsulta.query(consulta);
+            ResourceIterator iterador = resultados.getIterator();
+
+            System.out.println("\n\t.:TÍTULOS LIBROS:.");
+            // Recorremos el iterador con un while para mostrar el contenido (título) de cada nodo.
+            int i = 1;
+            while (iterador.hasMoreResources()) {
+                System.out.println(i + ". " + iterador.nextResource().getContent());
+                i++;
+            }
+        } catch (Exception e) {
+            e.getMessage();
         }
     }
 }
