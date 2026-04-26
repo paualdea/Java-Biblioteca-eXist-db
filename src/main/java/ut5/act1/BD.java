@@ -33,11 +33,14 @@ public class BD {
 
             // Configuramos la conexión a la colección raíz
             coleccion = DatabaseManager.getCollection(url, usuario, passwd);
+            System.out.println("Conexión a la DB realizada.");
+
             // Creamos un objeto que sirva para administrar la DB
             CollectionManagementService administrador = (CollectionManagementService) coleccion.getService("CollectionManagementService", "1.0");
 
             // Creamos la colección principal 'Biblioteca' (si existe no se sobreescribe)
             administrador.createCollection("Biblioteca");
+            System.out.println("Colección 'Biblioteca' creada.");
             // Cambiamos la colección actual a 'Biblioteca'
             coleccion = DatabaseManager.getCollection(url + "/Biblioteca",usuario,passwd);
         } catch (Exception e) {
@@ -59,6 +62,7 @@ public class BD {
             recurso.setContent(xml);
             // Almacenamos este nuevo recurso en el servidor de DB XML
             coleccion.storeResource(recurso);
+            System.out.println("Creación 'libros.txt' completada.");
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
@@ -77,6 +81,7 @@ public class BD {
 
             // Ejecutamos la sentencia que recibimos cómo parámetro.
             servicioActualizacion.query(sentencia);
+            System.out.println("Modificación nodo 'libro' completada.");
         } catch (Exception e) {
             e.getMessage();
         }
@@ -100,7 +105,7 @@ public class BD {
             // Recorremos el iterador con un while para mostrar el contenido (título) de cada nodo.
             int i = 1;
             while (iterador.hasMoreResources()) {
-                System.out.println(i + ". " + iterador.nextResource().getContent());
+                System.out.println(i + ". " + iterador.nextResource().getContent() + "\n");
                 i++;
             }
         } catch (Exception e) {
@@ -115,6 +120,7 @@ public class BD {
         try {
             // Borramos el recurso 'libros.xml' de la colección (Biblioteca).
             coleccion.removeResource(coleccion.getResource("libros.xml"));
+            System.out.println("Borrado fichero 'libros.txt' completado.");
         } catch (Exception e) {
             e.getMessage();
         }
@@ -127,6 +133,7 @@ public class BD {
         try {
             // Cerramos la conexión de la coleccion de la DB.
             coleccion.close();
+            System.out.println("Conexión con la DB cerrada.");
         } catch (Exception e) {
             e.getMessage();
         }
