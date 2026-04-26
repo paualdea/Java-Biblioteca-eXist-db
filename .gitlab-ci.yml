@@ -15,12 +15,8 @@ job_compilacion:
   stage: build
   script:
     - mvn clean package -DskipTests
-    # Maven genera dos JARs. Buscamos el que tiene las dependencias (el Fat JAR)
     - FAT_JAR=$(ls target/*-jar-with-dependencies.jar)
-    - echo "Fat JAR detectado: $FAT_JAR"
-    # Lo movemos al nombre estándar que espera tu pipeline
     - mv "$FAT_JAR" "$PACKAGE_NAME"
-    - echo "Archivo $PACKAGE_NAME listo para distribución."
   artifacts:
     paths:
       - $PACKAGE_NAME

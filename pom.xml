@@ -6,7 +6,7 @@
 
     <groupId>ut5.act1</groupId>
     <artifactId>Java-Biblioteca-eXist-db</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
